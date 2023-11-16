@@ -1,15 +1,15 @@
 #!/bin/bash
 
+# IN PROGRESS
+
 # set destination
 destiny="x86_64"
 
 pwdpath=$(echo $PWD)
 pwd=$(basename "$PWD")
 
-search1=$(basename "$PWD")
-search2=arcolinux
+search=$(basename "$PWD")
 
-search=$search1
 rm -rf /tmp/tempbuild
 if test -f "/tmp/tempbuild"; then
   rm /tmp/tempbuild
