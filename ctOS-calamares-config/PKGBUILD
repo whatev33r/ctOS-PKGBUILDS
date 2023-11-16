@@ -1,0 +1,28 @@
+# Test PKGBUILD for ctOS
+
+pkgname=ctOS-calamares-config
+pkgver=1
+pkgrel=1
+pkgdesc='ctOS config for the calamares installer.'
+arch=('any')
+groups=('blackarch-config')
+url="https://github.com/whatev33r/$pkgname"
+license=('custom:unknown')
+depends=('calamares')
+makedepends=('git')
+source=("git+https://github.com/whatev33r/$pkgname.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+package() {
+  cd $pkgname
+
+  install -dm 755 "$pkgdir/etc/calamares"
+
+  cp -a calamares/* "$pkgdir/etc/calamares"
+}
