@@ -15,8 +15,8 @@ if test -f "/tmp/tempbuild"; then
   rm /tmp/tempbuild
 fi
 mkdir /tmp/tempbuild
-cp -r $pwdpath/packages/*/* /tmp/tempbuild/
-#cp -r $pwdpath/.* /tmp/tempbuild
+#cp -r $pwdpath/packages/*/* /tmp/tempbuild/
+cp -r $pwdpath/packages/.* /tmp/tempbuild
 
 cd /tmp/tempbuild/
 
