@@ -25,7 +25,11 @@ echo "##########################################################################
 echo "#########        Let us build the package in CHROOT ~/Documents/chroot-archlinux"
 echo "#############################################################################################"
 tput sgr0
-CHROOT=$HOME/Documents/chroot-archlinux
+
+# Build
+mkdir ~/build-chroot
+CHROOT=$HOME/build-chroot
+mkarchroot $CHROOT/root base-devel
 arch-nspawn $CHROOT/root pacman -Syu
 makechrootpkg -c -r $CHROOT
 
