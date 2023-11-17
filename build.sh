@@ -18,14 +18,20 @@ mkdir /tmp/tempbuild
 cp -r $pwdpath/packages/* /tmp/tempbuild/
 #cp -r $pwdpath/.* /tmp/tempbuild
 
-cd /tmp/tempbuild/
+#cd /tmp/tempbuild/
 
-tput setaf 3
+tput setaf 2
 echo "#############################################################################################"
-echo "#########        Let us build the package with MAKEPKG "$(basename `pwd`)
+echo "#########        Let us build the package in CHROOT ~/Documents/chroot-archlinux"
 echo "#############################################################################################"
 tput sgr0
-makepkg -sr --sign
+CHROOT=$HOME/Documents/chroot-archlinux
+arch-nspawn $CHROOT/root pacman -Syu
+makechrootpkg -c -r $CHROOT
+
+#echo "Signing the package"
+#echo "#############################################################################################"
+#gpg --detach-sign $search*pkg.tar.zst
 
 echo "Moving created files to " $destiny
 echo "#############################################################################################"
