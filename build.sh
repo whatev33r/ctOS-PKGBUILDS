@@ -27,6 +27,7 @@ echo "##########################################################################
 tput sgr0
 
 # Build
+rm -rf ~/build-chroot
 mkdir ~/build-chroot
 CHROOT=$HOME/build-chroot
 mkarchroot $CHROOT/root base-devel
