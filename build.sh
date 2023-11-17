@@ -10,15 +10,15 @@ pwd=$(basename "$PWD")
 
 search=$(basename "$PWD")
 
-#rm -rf /tmp/tempbuild
-#if test -f "/tmp/tempbuild"; then
-#  rm /tmp/tempbuild
-#fi
-#mkdir /tmp/tempbuild
-#cp -r $pwdpath/packages/*/* /tmp/tempbuild/
-#cp -r $pwdpath/.* /tmp/tempbuild
+rm -rf /tmp/tempbuild
+if test -f "/tmp/tempbuild"; then
+  rm /tmp/tempbuild
+fi
+mkdir /tmp/tempbuild
+cp -r $pwdpath/packages/*/* /tmp/tempbuild/
+cp -r $pwdpath/.* /tmp/tempbuild
 
-#cd /tmp/tempbuild/
+cd /tmp/tempbuild/
 
 tput setaf 2
 echo "#############################################################################################"
@@ -32,7 +32,7 @@ mkdir ~/build-chroot
 CHROOT=$HOME/build-chroot
 mkarchroot $CHROOT/root base-devel
 arch-nspawn $CHROOT/root pacman -Syu
-cp -r $pwdpath/packages/*/* $CHROOT/root
+#cp -r $pwdpath/packages/*/* $CHROOT/root
 makechrootpkg -c -r $CHROOT
 
 #echo "Signing the package"
