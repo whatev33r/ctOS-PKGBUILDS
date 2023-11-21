@@ -26,7 +26,9 @@ echo "> Building pkgs"
 tput sgr0
 
 for d in packages/*; do
+  tput setaf 8
   echo Building $d..
+  tput sgr0
   cd $d
   makechrootpkg -r $CHROOT
   cd ../../
