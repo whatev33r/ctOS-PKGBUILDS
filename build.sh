@@ -2,15 +2,16 @@
 
 # var
 destiny="$PWD/x86_64"
+builddir="/tmp/ctos-tmp"
 
 # spawn folders
 tput setaf 10
-echo "> Cleaning /tmp/ctos-build"
+echo "> Cleaning /tmp/ctos-chroot"
 tput sgr0
 
-rm -rf /tmp/ctos-build
-mkdir /tmp/ctos-build
-export CHROOT=/tmp/ctos-build
+rm -rf /tmp/ctos-chroot
+mkdir /tmp/ctos-chroot
+export CHROOT=/tmp/ctos-chroot
 
 # generate chroot
 tput setaf 10
