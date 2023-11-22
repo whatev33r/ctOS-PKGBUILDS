@@ -2,7 +2,6 @@
 
 # var
 destiny="$PWD/x86_64"
-builddir="/tmp/ctos-tmp"
 
 # spawn folders
 tput setaf 10
