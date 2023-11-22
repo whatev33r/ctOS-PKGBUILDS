@@ -9,8 +9,11 @@ echo "> Cleaning /tmp/ctos-chroot"
 tput sgr0
 
 rm -rf /tmp/ctos-chroot
+rm -rf /tmp/ctos-build
 mkdir /tmp/ctos-chroot
+mkdir /tmp/ctos-build
 export CHROOT=/tmp/ctos-chroot
+export TMPBUILD=/tmp/ctos-build
 
 # generate chroot
 tput setaf 10
@@ -20,18 +23,25 @@ tput sgr0
 mkarchroot -M configs/makepkg.conf -C configs/pacman.conf $CHROOT/root base-devel
 arch-nspawn $CHROOT/root pacman -Syu &> /dev/null
 
+# move pkgs
+tput setaf 10
+echo "> Moving pkgs"
+tput sgr0
+
+cp -v -r packages/* $TMPBUILD
+
 # build pkgs
 tput setaf 10
 echo "> Building pkgs"
 tput sgr0
 
-for d in packages/*; do
+for d in $TMPBUILD; do
   tput setaf 8
   echo Building $d..
   tput sgr0
   cd $d
   makechrootpkg -r $CHROOT
-  cd ../../
+  cd ..
 done
 
 # clean folder & mv pkgs
@@ -39,23 +49,13 @@ tput setaf 10
 echo "> Cleaning folders"
 tput sgr0
 
-for d in packages/*; do
+for d in $TMPBUILD; do
   echo Cleaning $d..
   cd $d
   # mv pkgs
   mv -n *pkg.tar.zst $destiny &> /dev/null
   mv -n *pkg.tar.zst.sig $destiny &> /dev/null
-  # clean folder
-  if [[ -f $wpdpath/*.log ]]; then
-    rm $pwdpath/*.log
-  fi
-  if [[ -f $wpdpath/*.deb ]]; then
-    rm $pwdpath/*.deb
-  fi
-  if [[ -f $wpdpath/*.tar.gz ]]; then
-    rm $pwdpath/*.tar.gz
-  fi
-  cd ../../
+  cd ..
 done
 
 # generate repo db
