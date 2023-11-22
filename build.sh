@@ -39,6 +39,7 @@ for d in $TMPBUILD/*; do
   echo Building $d..
   cd $d
   # build in chroot
+  # chown -R user:user .
   makechrootpkg -r $CHROOT
   cd ..
 done
