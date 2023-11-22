@@ -35,7 +35,7 @@ tput setaf 10
 echo "> Building pkgs"
 tput sgr0
 
-for d in $TMPBUILD; do
+for d in $TMPBUILD/*; do
   tput setaf 9
   echo Building $d..
   tput sgr0
@@ -50,7 +50,7 @@ tput setaf 10
 echo "> Cleaning folders"
 tput sgr0
 
-for d in $TMPBUILD; do
+for d in $TMPBUILD/*; do
   tput setaf 9
   echo Cleaning $d..
   tput sgr0
