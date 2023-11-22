@@ -36,9 +36,7 @@ echo "> Building pkgs"
 tput sgr0
 
 for d in $TMPBUILD/*; do
-  tput setaf 9
   echo Building $d..
-  tput sgr0
   cd $d
   # build in chroot
   makechrootpkg -r $CHROOT
@@ -51,9 +49,7 @@ echo "> Cleaning folders"
 tput sgr0
 
 for d in $TMPBUILD/*; do
-  tput setaf 9
   echo Cleaning $d..
-  tput sgr0
   cd $d
   # mv pkgs
   mv -n *pkg.tar.zst $destiny &> /dev/null
