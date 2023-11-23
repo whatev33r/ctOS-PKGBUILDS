@@ -5,23 +5,23 @@ destiny="$PWD/x86_64"
 
 # spawn folders
 tput setaf 10
-echo "> Cleaning /tmp/ctos-chroot"
+echo "> Cleaning build folder"
 tput sgr0
 
-rm -rf /tmp/ctos-chroot
+#rm -rf /tmp/ctos-chroot
 rm -rf /tmp/ctos-build
-mkdir /tmp/ctos-chroot
+#mkdir /tmp/ctos-chroot
 mkdir /tmp/ctos-build
-export CHROOT=/tmp/ctos-chroot
+#export CHROOT=/tmp/ctos-chroot
 export TMPBUILD=/tmp/ctos-build
 
 # generate chroot
-tput setaf 10
-echo "> Setting up chroot env in $CHROOT"
-tput sgr0
+#tput setaf 10
+#echo "> Setting up chroot env in $CHROOT"
+#tput sgr0
 
-mkarchroot -M configs/makepkg.conf -C configs/pacman.conf $CHROOT/root base-devel
-arch-nspawn $CHROOT/root pacman -Syu &> /dev/null
+#mkarchroot -M configs/makepkg.conf -C configs/pacman.conf $CHROOT/root base-devel
+#arch-nspawn $CHROOT/root pacman -Syu &> /dev/null
 
 # move pkgs
 tput setaf 10
@@ -40,7 +40,8 @@ for d in $TMPBUILD/*; do
   cd $d
   # build in chroot
   # chown -R user:user .
-  makechrootpkg -r $CHROOT
+  #makechrootpkg -r $CHROOT
+  makepkg -s --noconfirm
   cd ..
 done
 
@@ -63,4 +64,5 @@ tput setaf 10
 echo "> Generating repo database"
 tput sgr0
 
-repo-add $destiny/ctOS.db.tar.gz $destiny/*.pkg.tar.zst
+repo-add $destiny/ctOS-Repo.db.tar.gz $destiny/*.pkg.tar.zst
+find $destiny -maxdepth 1 -type l -delete
