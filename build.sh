@@ -41,7 +41,7 @@ for d in $TMPBUILD/*; do
   # build in chroot
   # chown -R user:user .
   #makechrootpkg -r $CHROOT
-  makepkg -s --noconfirm
+  sudo -u liveuser makepkg -s --noconfirm
   cd ..
 done
 
