@@ -27,7 +27,7 @@ tput sgr0
 for d in $TMPBUILD/*; do
   echo Building $d..
   cd $d
-  sudo -u 1000 makepkg -s --noconfirm
+  sudo -u "#1000" makepkg -s --noconfirm
   cd ..
 done
 
