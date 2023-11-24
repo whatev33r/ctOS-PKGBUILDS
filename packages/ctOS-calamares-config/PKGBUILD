@@ -3,7 +3,7 @@
 pkgname=ctOS-calamares-config
 pkgver=1
 pkgrel=1
-pkgdesc='ctOS config for the calamares installer.'
+pkgdesc='ctOS config for the calamares installer'
 arch=('any')
 groups=('ctOS-config')
 url="https://github.com/whatev33r/$pkgname"
