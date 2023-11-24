@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # dest
-destiny="x86_64"
+destiny="$PWD/x86_64"
 
 # create tmp build
 tput setaf 10
@@ -45,7 +45,9 @@ rm -rf $TMPBUILD
 tput setaf 10
 echo "> Generating repo database"
 tput sgr0
-repo-add $destiny/ctOS.db.tar.gz $destiny/*.pkg.tar.zst
-find $destiny -maxdepth 1 -type l -delete
-mv $destiny/ctOS.db.tar.gz $destiny/ctOS.db
-mv $destiny/ctOS.files.tar.gz $destiny/ctOS.files
+cd $destiny
+repo-add ctOS.db.tar.gz *.pkg.tar.zst
+find -maxdepth 1 -type l -delete
+mv ctOS.db.tar.gz ctOS.db
+mv ctOS.files.tar.gz ctOS.files
+cd ..
