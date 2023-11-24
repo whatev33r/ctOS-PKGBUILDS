@@ -51,7 +51,7 @@ tput setaf 10
 echo "> Generating repo database"
 tput sgr0
 
-repo-add $destiny/ctOS-Repo.db.tar.gz $destiny/*.pkg.tar.zst
-#find $destiny -maxdepth 1 -type l -delete
-#mv ctOS-Repo.db.tar.gz ctOS-Repo.db
-#mv ctOS-Repo.files.tar.gz ctOS-Repo.files
+repo-add $destiny/ctOS.db.tar.gz $destiny/*.pkg.tar.zst
+find $destiny -maxdepth 1 -type l -delete
+mv ctOS.db.tar.gz ctOS.db
+mv ctOS.files.tar.gz ctOS.files
