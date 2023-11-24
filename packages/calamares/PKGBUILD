@@ -1,47 +1,52 @@
-# Maintainer:  David Spink <yorper_protonmail.com>
-# Contributor: Philip Müller <philm_manjaro.org>
+# Maintainer: Philip Müller <philm[at]manjaro[dog]org>
+# https://gitlab.manjaro.org/manjaro-arm/packages/extra/calamares/-/blob/master/PKGBUILD
+# https://gitlab.manjaro.org/packages/extra/calamares/-/blob/master/PKGBUILD
 
 pkgname=calamares
-pkgver=3.2.20
-pkgrel=0.1
+_pkgname=calamares
+pkgver=3.3.0.230902
+pkgrel=09
 pkgdesc='Distribution-independent installer framework'
-arch=('x86_64')
+arch=('i686' 'x86_64')
 license=(GPL)
-url="https://github.com/Cleanjaro/calamares"
+url="https://github.com/calamares/calamares/"
 license=('LGPL')
-depends=( 'qt5-svg' 'qt5-webengine' 'yaml-cpp' 'networkmanager' 'upower' 'kcoreaddons5' 'kconfig5' 'ki18n5' 'kservice5' \
-'kwidgetsaddons5' 'kpmcore' 'squashfs-tools' 'rsync' 'cryptsetup' 'qt5-xmlpatterns' 'doxygen' 'dmidecode' \
-'gptfdisk' 'hwinfo' 'kparts5' 'polkit-qt5' 'python' 'solid5' 'qt5-tools' 'boost-libs' 'libpwquality' 'ckbcomp' 'qt5-quickcontrols2' )
-makedepends=('extra-cmake-modules' 'qt5-tools' 'qt5-translations' 'git' 'boost')
+depends=('kdbusaddons5' 'kconfig5' 'kcoreaddons5' 'kiconthemes5' 'ki18n5' 'kio5' 'solid5' 'yaml-cpp' 'kpmcore' 'mkinitcpio-openswap'
+         'boost-libs' 'ckbcomp' 'hwinfo' 'qt5-svg' 'polkit-qt5' 'gtk-update-icon-cache' 'plasma-framework5'
+         'qt5-xmlpatterns' 'squashfs-tools' 'libpwquality' 'efibootmgr' 'icu' 'appstream-qt') 
+makedepends=('extra-cmake-modules' 'qt5-tools' 'qt5-translations' 'git' 'boost' 'kparts5' 'kdbusaddons5')
 backup=('usr/share/calamares/modules/bootloader.conf'
         'usr/share/calamares/modules/displaymanager.conf'
         'usr/share/calamares/modules/initcpio.conf'
         'usr/share/calamares/modules/unpackfs.conf')
 
-source+=("git+$url.git")
-sha256sums=('SKIP')
+source=($_pkgname::git+https://github.com/calamares/calamares#commit=7fa8fa680c92f7e5a729934e9817a85a9078e730
+	"calamares.desktop"
+	"calamares_polkit"
+	"49-nopasswd-calamares.rules")
+
+sha256sums=('SKIP'
+            'd6a5ce002c99586dfa0cb8621cad631f148dfd0d6d234c31643a63c585c546ee'
+            'c176b28007bd1c1f23d8dbb2c936fa54d0c01bacfb67290ddad597606c129df3'
+            '56d85ff6bf860b9559b8c9f997ad9b1002f3fccc782073760eca505e3bddd176')
 
 prepare() {
-	cd calamares
-	tar -xf calamares-${pkgver}-stable.tar.gz
-	mv calamares-3.2.xx-stable ${srcdir}/calamares-${pkgver}
-	cd ${srcdir}/calamares-${pkgver}
-	sed -i -e 's/"Install configuration files" OFF/"Install configuration files" ON/' CMakeLists.txt
+	cd ${srcdir}/calamares
+	#sed -i -e 's/"Install configuration files" OFF/"Install configuration files" ON/' CMakeLists.txt
+	sed -i -e 's/etc\/sddm.conf/etc\/sddm.conf.d\/kde_settings.conf/' src/modules/displaymanager/main.py
 
 	# patches here
 
 	# change version
 	_ver="$(cat CMakeLists.txt | grep -m3 -e "  VERSION" | grep -o "[[:digit:]]*" | xargs | sed s'/ /./g')"
-	printf 'Version: %s-%s' "${_ver}" "${pkgrel}"
+	#printf 'Version: %s-%s' "${_ver}" "${pkgrel}"
 	sed -i -e "s|\${CALAMARES_VERSION_MAJOR}.\${CALAMARES_VERSION_MINOR}.\${CALAMARES_VERSION_PATCH}|${_ver}-${pkgrel}|g" CMakeLists.txt
-#	sed -i -e "s|CALAMARES_VERSION_RC 1|CALAMARES_VERSION_RC 0|g" CMakeLists.txt
+	sed -i -e "s|CALAMARES_VERSION_RC 1|CALAMARES_VERSION_RC 0|g" CMakeLists.txt
 
-	# change branding
-	sed -i -e "s/default/cleanjaro/g" src/branding/CMakeLists.txt
 }
 
 build() {
-	cd ${srcdir}/calamares-${pkgver}
+	cd ${srcdir}/calamares
 
 	mkdir -p build
 	cd build
@@ -49,27 +54,23 @@ build() {
               -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_INSTALL_PREFIX=/usr \
               -DCMAKE_INSTALL_LIBDIR=lib \
-              -DWITH_PYTHONQT:BOOL=ON \
+              -DWITH_PYTHONQT=OFF \
+              -DWITH_KF5DBus=OFF \
               -DBoost_NO_BOOST_CMAKE=ON \
-              -DSKIP_MODULES="tracking webview interactiveterminal initramfs \
+              -DWEBVIEW_FORCE_WEBKIT=OFF \
+              -DSKIP_MODULES="webview tracking webview interactiveterminal initramfs \
                               initramfscfg dracut dracutlukscfg \
                               dummyprocess dummypython dummycpp \
-                              dummypythonqt services-openrc"
+                              dummypythonqt services-openrc \
+                              keyboardq localeq welcomeq"
         make
 }
 
 package() {
-	cd ${srcdir}/calamares-${pkgver}/build
+	cd ${srcdir}/calamares/build
 	make DESTDIR="$pkgdir" install
-	install -Dm644 "../data/install-icon.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/calamares.svg"
-	install -Dm644 "../data/calamares.desktop" "$pkgdir/usr/share/applications/calamares.desktop"
-	install -Dm755 "../data/calamares_polkit" "$pkgdir/usr/bin/calamares_polkit"
-	install -Dm644 "../data/49-nopasswd-calamares.rules" "$pkgdir/etc/polkit-1/rules.d/49-nopasswd-calamares.rules"
-	chmod 750      "$pkgdir"/etc/polkit-1/rules.d
-
-	# rename services-systemd back to services
-	mv "$pkgdir/usr/lib/calamares/modules/services-systemd" "$pkgdir/usr/lib/calamares/modules/services"
-	mv "$pkgdir/usr/share/calamares/modules/services-systemd.conf" "$pkgdir/usr/share/calamares/modules/services.conf"
-	sed -i -e 's/-systemd//' "$pkgdir/usr/lib/calamares/modules/services/module.desc"
-	sed -i -e 's/-systemd//' "$pkgdir/usr/share/calamares/settings.conf"
+	install -Dm644 "${srcdir}/calamares.desktop" "$pkgdir/etc/xdg/autostart/calamares.desktop"
+	install -Dm755 "${srcdir}/calamares_polkit" "$pkgdir/usr/bin/calamares_polkit"
+	install -Dm644 "${srcdir}/49-nopasswd-calamares.rules" "$pkgdir/etc/polkit-1/rules.d/49-nopasswd-calamares.rules"
+	chmod 750 "$pkgdir"/etc/polkit-1/rules.d
 }
