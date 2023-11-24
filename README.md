@@ -9,4 +9,4 @@ The source for packages contained in the ctOS repository.
 pacman -S devtools 
 ```
 
-- Build Script has to be executed as **user**!
+Build Script has to be executed as **user**!
