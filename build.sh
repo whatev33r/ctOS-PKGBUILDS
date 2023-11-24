@@ -7,8 +7,8 @@ destiny="$PWD/x86_64"
 tput setaf 10
 echo "> Creating build folder"
 tput sgr0
-mkdir /tmp/ctos-build
-export TMPBUILD=/tmp/ctos-build
+mkdir $HOME/ctos-build
+export TMPBUILD=$HOME/ctos-build
 
 # move pkgs
 tput setaf 10
@@ -23,8 +23,7 @@ tput sgr0
 for d in $TMPBUILD/*; do
   echo Building $d..
   cd $d
-  chown -R 1000:1000 .
-  sudo -u "#1000" makepkg -s --noconfirm
+  makepkg -s --noconfirm
   cd ..
 done
 
