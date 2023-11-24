@@ -27,23 +27,18 @@ for d in $TMPBUILD/*; do
   cd ..
 done
 
-# clean folder & mv pkgs
+# mv pkgs / delete build folder
 tput setaf 10
-echo "> Cleaning folders"
+echo "> Moving pkgs / deleting build folder"
 tput sgr0
 for d in $TMPBUILD/*; do
   echo Cleaning $d..
   cd $d
   # mv pkgs
-  mv -n *pkg.tar.zst $destiny &> /dev/null
-  mv -n *pkg.tar.zst.sig $destiny &> /dev/null
+  mv -vn *pkg.tar.zst $destiny &> /dev/null
+  mv -vn *pkg.tar.zst.sig $destiny &> /dev/null
   cd ..
 done
-
-# create tmp build
-tput setaf 10
-echo "> Deleting build folder"
-tput sgr0
 rm -rf $HOME/ctos-build
 
 # generate repo db
