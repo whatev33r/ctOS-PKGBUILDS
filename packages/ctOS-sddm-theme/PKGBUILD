@@ -1,0 +1,28 @@
+# PKGBUILD for ctOS sddm theme
+
+pkgname=ctOS-sddm-theme
+pkgver=1
+pkgrel=1
+pkgdesc='sddm theme for ctOS.'
+arch=('any')
+groups=('ctOS-config')
+url="https://github.com/whatev33r/$pkgname"
+license=('custom:unknown')
+depends=('sddm')
+makedepends=('git')
+source=("git+https://github.com/whatev33r/$pkgname.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+package() {
+  cd $pkgname
+
+  install -dm 755 "$pkgdir/usr/share/sddm/themes"
+
+  cp -a sddm-ctos-theme/* "$pkgdir/usr/share/sddm/themes"
+}
