@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # dest
-destiny="$PWD/x86_64"
+destiny="x86_64"
 
 # create tmp build
 tput setaf 10
@@ -39,7 +39,7 @@ for d in $TMPBUILD/*; do
   mv -vn *pkg.tar.zst.sig $destiny &> /dev/null
   cd ..
 done
-rm -rf $PWD/ctos-build
+rm -rf $TMPBUILD
 
 # generate repo db
 tput setaf 10
