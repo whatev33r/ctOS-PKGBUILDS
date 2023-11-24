@@ -1,4 +1,4 @@
-# Test PKGBUILD for ctOS
+# PKGBUILD for ctOS calamares config
 
 pkgname=ctOS-calamares-config
 pkgver=1
