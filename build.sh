@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# var
+# dest
 destiny="$PWD/x86_64"
 
 # spawn folders
@@ -8,20 +8,9 @@ tput setaf 10
 echo "> Cleaning build folder"
 tput sgr0
 
-#rm -rf /tmp/ctos-chroot
 rm -rf /tmp/ctos-build
-#mkdir /tmp/ctos-chroot
 mkdir /tmp/ctos-build
-#export CHROOT=/tmp/ctos-chroot
 export TMPBUILD=/tmp/ctos-build
-
-# generate chroot
-#tput setaf 10
-#echo "> Setting up chroot env in $CHROOT"
-#tput sgr0
-
-#mkarchroot -M /etc/makepkg.conf -C /etc/pacman.conf $CHROOT/root base-devel
-#arch-nspawn $CHROOT/root pacman -Syu &> /dev/null
 
 # move pkgs
 tput setaf 10
@@ -38,7 +27,6 @@ tput sgr0
 for d in $TMPBUILD/*; do
   echo Building $d..
   cd $d
-  #makechrootpkg -r $CHROOT
   sudo -u liveuser makepkg -s --noconfirm
   cd ..
 done
