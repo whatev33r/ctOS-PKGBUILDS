@@ -20,7 +20,8 @@ backup=('usr/share/calamares/modules/bootloader.conf'
         'usr/share/calamares/modules/initcpio.conf'
         'usr/share/calamares/modules/unpackfs.conf')
 
-source=($_pkgname::git+https://github.com/calamares/calamares)
+source=($_pkgname::git+https://github.com/calamares/calamares
+	"calamares.desktop")
 
 sha256sums=('SKIP')
 
@@ -64,4 +65,5 @@ package() {
 	cd ${srcdir}/calamares/build
 	make DESTDIR="$pkgdir" install
         install -dm 755 "${pkgdir}/etc"
+	install -Dm644 "${srcdir}/calamares.desktop" "$pkgdir/etc/xdg/autostart/calamares.desktop"
 }
