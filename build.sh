@@ -20,7 +20,7 @@ export TMPBUILD=/tmp/ctos-build
 #echo "> Setting up chroot env in $CHROOT"
 #tput sgr0
 
-#mkarchroot -M configs/makepkg.conf -C configs/pacman.conf $CHROOT/root base-devel
+#mkarchroot -M /etc/makepkg.conf -C /etc/pacman.conf $CHROOT/root base-devel
 #arch-nspawn $CHROOT/root pacman -Syu &> /dev/null
 
 # move pkgs
