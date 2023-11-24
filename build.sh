@@ -44,7 +44,7 @@ done
 tput setaf 10
 echo "> Deleting build folder"
 tput sgr0
-rm -rf /tmp/ctos-build
+rm -rf $HOME/ctos-build
 
 # generate repo db
 tput setaf 10
