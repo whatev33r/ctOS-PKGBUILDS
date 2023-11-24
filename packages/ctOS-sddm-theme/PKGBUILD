@@ -3,7 +3,7 @@
 pkgname=ctOS-sddm-theme
 pkgver=1
 pkgrel=1
-pkgdesc='sddm theme for ctOS.'
+pkgdesc='sddm theme for ctOS'
 arch=('any')
 groups=('ctOS-config')
 url="https://github.com/whatev33r/$pkgname"
