@@ -22,10 +22,7 @@ backup=('usr/share/calamares/modules/bootloader.conf'
 
 source=($_pkgname::git+https://github.com/calamares/calamares)
 
-sha256sums=('SKIP'
-            'd6a5ce002c99586dfa0cb8621cad631f148dfd0d6d234c31643a63c585c546ee'
-            'c176b28007bd1c1f23d8dbb2c936fa54d0c01bacfb67290ddad597606c129df3'
-            '56d85ff6bf860b9559b8c9f997ad9b1002f3fccc782073760eca505e3bddd176')
+sha256sums=('SKIP')
 
 prepare() {
 	cd ${srcdir}/calamares
