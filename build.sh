@@ -52,5 +52,5 @@ echo "> Generating repo database"
 tput sgr0
 repo-add $destiny/ctOS.db.tar.gz $destiny/*.pkg.tar.zst
 find $destiny -maxdepth 1 -type l -delete
-mv ctOS.db.tar.gz ctOS.db
-mv ctOS.files.tar.gz ctOS.files
+mv $destiny/ctOS.db.tar.gz $destiny/ctOS.db
+mv $destiny/ctOS.files.tar.gz $destiny/ctOS.files
