@@ -7,8 +7,8 @@ destiny="$PWD/x86_64"
 tput setaf 10
 echo "> Creating build folder"
 tput sgr0
-mkdir $HOME/ctos-build
-export TMPBUILD=$HOME/ctos-build
+mkdir $PWD/ctos-build
+export TMPBUILD=$PWD/ctos-build
 
 # move pkgs
 tput setaf 10
@@ -39,7 +39,7 @@ for d in $TMPBUILD/*; do
   mv -vn *pkg.tar.zst.sig $destiny &> /dev/null
   cd ..
 done
-rm -rf $HOME/ctos-build
+rm -rf $PWD/ctos-build
 
 # generate repo db
 tput setaf 10
