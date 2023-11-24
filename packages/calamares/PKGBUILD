@@ -20,10 +20,7 @@ backup=('usr/share/calamares/modules/bootloader.conf'
         'usr/share/calamares/modules/initcpio.conf'
         'usr/share/calamares/modules/unpackfs.conf')
 
-source=($_pkgname::git+https://github.com/calamares/calamares#commit=7fa8fa680c92f7e5a729934e9817a85a9078e730
-	"calamares.desktop"
-	"calamares_polkit"
-	"49-nopasswd-calamares.rules")
+source=($_pkgname::git+https://github.com/calamares/calamares)
 
 sha256sums=('SKIP'
             'd6a5ce002c99586dfa0cb8621cad631f148dfd0d6d234c31643a63c585c546ee'
