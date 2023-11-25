@@ -1,8 +1,7 @@
 # Maintainer: "Amhairghin" Oscar Garcia Amor (https://ogarcia.me)
 
 pkgbase=tela-circle-icon-theme
-pkgname=('tela-circle-icon-theme-all'
-         'tela-circle-icon-theme-standard'
+pkgname=('tela-circle-icon-theme-standard'
          'tela-circle-icon-theme-black'
          'tela-circle-icon-theme-blue'
          'tela-circle-icon-theme-brown'
@@ -37,15 +36,6 @@ _package() {
   cd "${pkgbase^}-${pkgver//./-}"
   install -dm755 "${pkgdir}/usr/share/icons"
   ./install.sh -d "${pkgdir}/usr/share/icons" ${1}
-}
-
-package_tela-circle-icon-theme-all() {
-  pkgdesc="${pkgdesc} (all variants)"
-  conflicts=(${pkgname[@]/${pkgbase}-all})
-  for _p in ${pkgname[@]}; do _p=${_p}-git; conflicts+=(${_p}); done
-  cd "${pkgbase^}-${pkgver//./-}"
-  install -dm755 "${pkgdir}/usr/share/icons"
-  ./install.sh -a -d "${pkgdir}/usr/share/icons"
 }
 
 package_tela-circle-icon-theme-standard() {
