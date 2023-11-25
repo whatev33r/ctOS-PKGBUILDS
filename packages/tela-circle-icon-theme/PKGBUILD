@@ -21,6 +21,7 @@ pkgver=2023.10.07
 pkgrel=1
 pkgdesc='A flat colorful design icon theme'
 arch=('any')
+groups=('ctOS-config')
 url='https://github.com/vinceliuice/Tela-circle-icon-theme'
 license=('GPL3')
 depends=('gtk-update-icon-cache' 'hicolor-icon-theme')
