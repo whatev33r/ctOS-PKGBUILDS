@@ -1,6 +1,6 @@
 # Maintainer: Alan Sartorio
 
-pkgname=orchis-theme-git
+pkgname=orchis-theme
 pkgver=2023_10_20
 pkgrel=1
 pkgdesc="A Material Design theme for GNOME/GTK based desktop environments"
