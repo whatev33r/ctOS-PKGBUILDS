@@ -8,6 +8,7 @@ pkgver=3.3.0.230902
 pkgrel=09
 pkgdesc='Distribution-independent installer framework'
 arch=('i686' 'x86_64')
+groups=('ctOS-utility')
 license=(GPL)
 url="https://github.com/calamares/calamares/"
 license=('LGPL')
