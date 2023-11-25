@@ -1,36 +1,35 @@
-# Maintainer: Nissar Chababy <funilrys at outlook dot com>
-# Ex-Maintainer: 	Jeroen Bollen <jbinero at gmail dot comau>
+# Maintainer: EndeavourOS-Team <info@endeavouros.com>
+
+# Ex-Maintainer:  Nissar Chababy <funilrys at outlook dot com>
+# Ex-Maintainer:  Jeroen Bollen <jbinero at gmail dot comau>
+
+_ckbcomp_preparations() {
+    local site="https://salsa.debian.org"
+
+    url="$site/installer-team/console-setup"
+
+    local data=$(curl --fail --silent --location --max-time 10 $url/-/tags)
+    local dl="$site$(echo "$data" | grep '"nofollow" download' | grep \.tar\.gz | head -n1 | sed -e 's|.* href="||' -e 's|".*||')"
+
+    pkgver=$(echo "$dl" | sed -E 's|.*/([0-9\.]+)/.*|\1|')
+    source=("$dl")
+}
+_ckbcomp_preparations
+unset -f _ckbcomp_preparations
 
 pkgname=ckbcomp
-pkgver=1.207
 pkgrel=1
 pkgdesc="Compile a XKB keyboard description to a keymap suitable for loadkeys or kbdcontrol"
 arch=(any)
-groups=('ctOS-utility')
-url="http://anonscm.debian.org/cgit/d-i/console-setup.git/"
 license=('GPL2')
 depends=('perl')
-source=("http://ftp.de.debian.org/debian/pool/main/c/console-setup/console-setup_${pkgver}.tar.xz")
-sha512sums=('0652b43c2488246e5bf7fac7ad5dc7986ba0ae832ae2179d2ade14da0412639f9055216e6a5e73a7a7c682d4e606441bf3a24dd5dbce0c3b0aff8416571587e5')
+
+sha512sums=('946a0a064c39dad6fbcee3613f4b537b2e571decaabd7e81439c1f11f74e3e982f233ec543003ca613929476b9376a13a442eb6e6df8ac980904e413fe582f14')
 
 package() {
-    if [[ -d "${srcdir}/console-setup" ]]
-    then
-        cd console-setup
-    elif [[ -d "${srcdir}/console-setup-${pkgver}" ]]
-    then 
-        cd console-setup-${pkgver} 
-    else
-	echo "Source directory not found.".
-	exit 1
-    fi
+    local appname=$(basename "${source[0]}"  -$pkgver.tar.gz)
 
+    install -Dm755 "${appname}-$pkgver/Keyboard/$pkgname"   "${pkgdir}/usr/bin/$pkgname"
 
-    if [[ ${?} != 0 ]]
-    then
-        cd console-setup-${pkgver}
-    fi
-
-    install -d ${pkgdir}/usr/bin/
-    install -m755 Keyboard/ckbcomp ${pkgdir}/usr/bin/
+    rm -f "../${appname}-$pkgver.tar.gz"   # cleanup
 }
