@@ -2,7 +2,7 @@
 # Maintainer : EndeavourOS <info at endeavouros.com>
 # Calamares installer configured for EndeavourOS
 
-pkgname=calamares
+pkgname=calamares-eos
 pkgver=23.11.1.1
 pkgrel=1
 release_name="Galileo"
@@ -15,7 +15,7 @@ conflicts=('calamares-git')
 depends=( 'qt5-svg' 'qt5-webengine' 'yaml-cpp' 'networkmanager' 'upower' 'kcoreaddons5' 'kconfig5' 'ki18n5' 'kservice5' \
 'kwidgetsaddons5' 'kpmcore' 'squashfs-tools' 'rsync' 'cryptsetup' 'qt5-xmlpatterns' 'doxygen' 'dmidecode' \
 'gptfdisk' 'hwinfo' 'kparts5' 'polkit-qt5' 'python' 'solid5' 'qt5-tools' 'boost-libs' 'libpwquality' 'ckbcomp' 'qt5-quickcontrols2' )
-provides=("calamares")
+provides=("calamares-eos")
 options=(!strip !emptydirs)
 source=("https://github.com/endeavouros-team/${pkgname}/archive/refs/tags/${pkgver}.tar.gz")
 
