@@ -17,7 +17,7 @@ depends=( 'qt5-svg' 'qt5-webengine' 'yaml-cpp' 'networkmanager' 'upower' 'kcorea
 'gptfdisk' 'hwinfo' 'kparts5' 'polkit-qt5' 'python' 'solid5' 'qt5-tools' 'boost-libs' 'libpwquality' 'ckbcomp' 'qt5-quickcontrols2' )
 provides=("calamares-eos")
 options=(!strip !emptydirs)
-source=("https://github.com/endeavouros-team/${pkgname}/archive/refs/tags/${pkgver}.tar.gz")
+source=("https://github.com/endeavouros-team/calamares/archive/refs/tags/${pkgver}.tar.gz")
 
 sha256sums=('023047ef1719b09778e1976091039dbf88f06b0db6333ab180233ce228bd3fce')
 
