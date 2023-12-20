@@ -10,7 +10,7 @@ pkgdesc='Distribution-independent installer framework'
 arch=('i686' 'x86_64')
 groups=('ctOS-utility')
 license=(GPL)
-url="https://github.com/calamares/calamares/"
+url="https://github.com/whatev33r/ctOS-calamares/"
 license=('LGPL')
 depends=('kdbusaddons5' 'kconfig5' 'kcoreaddons5' 'kiconthemes5' 'ki18n5' 'kio5' 'solid5' 'yaml-cpp' 'kpmcore' 'mkinitcpio-openswap'
          'boost-libs' 'ckbcomp' 'hwinfo' 'qt5-svg' 'polkit-qt5' 'gtk-update-icon-cache' 'plasma-framework5'
